@@ -3,3 +3,8 @@
 ################################################################################
 
 /WordPuzzle/.vs/WordPuzzle/v16
+/WordPuzzle/WordPuzzle/obj
+/WordPuzzle/WordPuzzle/bin/Debug/netcoreapp2.2
+/WordPuzzle/WordPuzzle.Tests/bin/Debug/netstandard2.0
+/WordPuzzle/WordPuzzle.Tests/obj
+/WordPuzzle/WordPuzzle.UnitTests/obj
