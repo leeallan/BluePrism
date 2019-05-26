@@ -65,42 +65,17 @@ namespace WordPuzzle
                     break;
                 }
 
-                _goalReached = _nodeProcessor.ProcessNodes(_currentNodes, props); // NodeProcessor(_currentNodes);
+                _goalReached = _nodeProcessor.ProcessNodes(_currentNodes, props); 
 
                 if (!_goalReached)
                 {
-                    List<Node> temp = new List<Node>();
-                    foreach (Node n in _currentNodes)
-                    {
-                        temp.AddRange(n.ChildNodes);
-                    }
-                    _currentNodes.Clear();
-                    _currentNodes.AddRange(temp);
-                    
+                    _nodeProcessor.AdvanceCurrentNodes(_currentNodes);                    
                 }
                 else
                 {
                     var a = _currentNodes;
                 }              
-            }
-
-
-          
+            }          
         }
-
-        //bool NodeProcessor(List<Node> nodes)
-        //{
-        //    foreach (Node n in nodes)
-        //    {  
-        //        if (n.Word == _endWord)
-        //            return true;
-               
-        //        var regex = _wordUtility.GetWordSearchRegex(n.Word, _endWord);
-        //        n.ChildNodes = _wordFilter.GetWordsForRegex(regex, _mainList, _startWord, n);              
-               
-        //    }
-
-        //    return false;
-        //}
     }
 }

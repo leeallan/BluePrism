@@ -8,5 +8,6 @@ namespace WordPuzzle.Interfaces
     public interface INodeProcessor
     {
         bool ProcessNodes(List<Node> currentNodes, AppProperties props);
+        void AdvanceCurrentNodes(List<Node> currentNodes);
     }
 }
