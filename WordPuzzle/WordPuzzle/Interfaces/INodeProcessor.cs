@@ -9,5 +9,6 @@ namespace WordPuzzle.Interfaces
     {
         bool ProcessNodes(List<Node> currentNodes, AppProperties props);
         void AdvanceCurrentNodes(List<Node> currentNodes);
+                
     }
 }

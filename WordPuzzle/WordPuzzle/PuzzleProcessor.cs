@@ -38,23 +38,21 @@ namespace WordPuzzle
 
         public void Process(string startWord, string endWord)
         {
+
+            //TODO Pass event into processor, to retracenodes, and output result
+            //unit testing
+            _mainList = _fileUtility.FileToList(@"C:\Users\lsall\Downloads\Blue Prism\words-english.txt");
+            _mainList.Remove(startWord);
+            
             AppProperties props = new AppProperties();
             props.EndWord = _endWord = endWord;
-            props.StartWord = _startWord = startWord;
-
-            
-           _mainList = _fileUtility.FileToList(@"C:\Users\lsall\Downloads\Blue Prism\words-english.txt");
-           _mainList.Remove(startWord);
-
+            props.StartWord = _startWord = startWord;           
             props.WordList = _mainList;
 
-          
-
-            Node startNode = new Node() { IsStartNode = true, Word = startWord };
             _currentNodes = new List<Node>();
-            _currentNodes.Add(startNode);
-            string msg = "";
-           
+            _currentNodes.Add(new Node() { IsStartNode = true, Word = startWord });
+
+            string msg = "";           
 
             while(!_goalReached)
             {
@@ -73,7 +71,10 @@ namespace WordPuzzle
                 }
                 else
                 {
+                    //TODO: anything here?
                     var a = _currentNodes;
+                    break;
+                    //TODO success
                 }              
             }          
         }

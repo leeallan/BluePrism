@@ -17,22 +17,7 @@ namespace WordPuzzle
             _wordFilter = wordFilter;
             _wordUtility = wordUtility;
 
-        }
-
-        /// <summary>
-        /// Set the current nodes list to all the children of the current nodes
-        /// </summary>
-        /// <param name="currentNodes"></param>
-        public void AdvanceCurrentNodes(List<Node> currentNodes)
-        {
-            List<Node> temp = new List<Node>();
-            foreach (Node n in currentNodes)
-            {
-                temp.AddRange(n.ChildNodes);
-            }
-            currentNodes.Clear();
-            currentNodes.AddRange(temp);
-        }
+        }       
 
         /// <summary>
         /// process current Node list and determine if end word reached
@@ -52,6 +37,21 @@ namespace WordPuzzle
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Set the current nodes list to all the children of the current nodes
+        /// </summary>
+        /// <param name="currentNodes"></param>
+        public void AdvanceCurrentNodes(List<Node> currentNodes)
+        {
+            List<Node> temp = new List<Node>();
+            foreach (Node n in currentNodes)
+            {
+                temp.AddRange(n.ChildNodes);
+            }
+            currentNodes.Clear();
+            currentNodes.AddRange(temp);
         }
     }
 }
