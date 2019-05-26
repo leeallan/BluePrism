@@ -31,6 +31,7 @@ namespace WordPuzzle
                 .AddScoped<IFileUtility, FileUtility>()
                 .AddScoped<IWordFilter, WordFilter>()
                 .AddScoped<IWordUtility, WordUtility>()
+                .AddScoped<INodeProcessor, NodeProcessor>()
                 .BuildServiceProvider();
 
             //configure console logging

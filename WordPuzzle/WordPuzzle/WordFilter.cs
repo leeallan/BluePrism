@@ -11,40 +11,48 @@ namespace WordPuzzle
     public class WordFilter : IWordFilter
     {
 
+        //public List<string> CharacterAtPosition(char item, int index, List<string> list)
+        //{
+        //    return list.Where(x => x.ElementAt(index) == item).ToList();
+        //}
 
-        public List<string> CharacterAtPosition(char item, int index, List<string> list)
-        {
-            return list.Where(x => x.ElementAt(index) == item).ToList();
-        }
-
-        public List<Node> GetWordsForRegex(string regex, List<string> list, string thisWord, string originalWord, Node parentNode)
+        public List<Node> GetWordsForRegex(string regex, List<string> list, string originalWord, Node parentNode)
         {
             Regex r = new Regex(regex, RegexOptions.IgnoreCase);
-            list.Remove(thisWord);
+
+            list.Remove(parentNode.Word);
+
             var matchedList = list
                     .Where(x => r.IsMatch(x))
                         .Select(x => new Node()
                         {
-                            Word = x,
-                            // IsGoal = endWord == x ? true : false,
+                            Word = x,                            
                             ParentNode = parentNode
                         })
                         .ToList();
 
             SanitiseMatchedList(matchedList, originalWord);
+
             return matchedList;
 
         }
 
-        private void SanitiseMatchedList(List<Node> list, string originalWord)
+
+        /// <summary>
+        /// Remove words that have n nuber of letters different to the startword, (Controlled by a threshold setting)
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="originalWord"></param>
+        private void SanitiseMatchedList(List<Node> nodeList, string originalWord)
         {
             List<int> indices = new List<int>();
-            for (int i = 0; i < list.Count; i++)
+
+            for (int i = 0; i < nodeList.Count; i++)
             {
                 byte mismatchCount = 0;
-                for (int j = 0; j < list[i].Word.Length; j++)
+                for (int j = 0; j < nodeList[i].Word.Length; j++)
                 {
-                    if (list[i].Word[j] != originalWord[j])
+                    if (nodeList[i].Word[j] != originalWord[j])
                     {
                         mismatchCount++;
                     }
@@ -58,7 +66,7 @@ namespace WordPuzzle
             var orderedist = indices.OrderByDescending(x => x).ToList();
             foreach (var index in orderedist)
             {
-                list.Remove(list[index]);
+                nodeList.Remove(nodeList[index]);
             }
 
 

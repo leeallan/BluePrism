@@ -17,14 +17,17 @@ namespace WordPuzzle
         private readonly IFileUtility _fileUtility;
         private readonly IWordUtility _wordUtility;
         private readonly IWordFilter _wordFilter;
+        private readonly INodeProcessor _nodeProcessor;
         public PuzzleProcessor(
             IFileUtility fileUtility,
             IWordUtility wordUtility,
-            IWordFilter wordFilter)
+            IWordFilter wordFilter,
+            INodeProcessor nodeProcessor)
         {
             _fileUtility = fileUtility;
             _wordUtility = wordUtility;
             _wordFilter = wordFilter;
+            _nodeProcessor = nodeProcessor;
         }
 
         List<Node> _currentNodes;
@@ -35,11 +38,15 @@ namespace WordPuzzle
 
         public void Process(string startWord, string endWord)
         {
-            _endWord = endWord;
-            _startWord = startWord;
+            AppProperties props = new AppProperties();
+            props.EndWord = _endWord = endWord;
+            props.StartWord = _startWord = startWord;
+
             
-            _mainList = _fileUtility.FileToList(@"C:\Users\lsall\Downloads\Blue Prism\words-english.txt");
-           bool b=  _mainList.Remove(startWord);
+           _mainList = _fileUtility.FileToList(@"C:\Users\lsall\Downloads\Blue Prism\words-english.txt");
+           _mainList.Remove(startWord);
+
+            props.WordList = _mainList;
 
           
 
@@ -58,7 +65,7 @@ namespace WordPuzzle
                     break;
                 }
 
-                _goalReached =  NodeProcessor(_currentNodes);
+                _goalReached = _nodeProcessor.ProcessNodes(_currentNodes, props); // NodeProcessor(_currentNodes);
 
                 if (!_goalReached)
                 {
@@ -74,33 +81,26 @@ namespace WordPuzzle
                 else
                 {
                     var a = _currentNodes;
-                }
-                //var regex = _wordUtility.GetWordSearchRegex(startWord, endWord);
-              //  _currentNodes = _wordFilter.GetWordsForRegex(regex, _mainList, endWord);
+                }              
             }
 
 
-            //for(int i = 0; i < charIndices.Length; i++)
-            //{
-            //    _wordsAtCharPositions[i]=  _wordFilter.CharacterAtPosition(charIndices[i].Char, charIndices[i].Index, list);
-            //}
+          
         }
 
-        bool NodeProcessor(List<Node> nodes)
-        {
-            foreach (Node n in nodes)
-            {  
-                if (n.Word == _endWord)
-                    return true;
-
+        //bool NodeProcessor(List<Node> nodes)
+        //{
+        //    foreach (Node n in nodes)
+        //    {  
+        //        if (n.Word == _endWord)
+        //            return true;
                
-                var regex = _wordUtility.GetWordSearchRegex(n.Word, _endWord);
-                n.ChildNodes = _wordFilter.GetWordsForRegex(regex, _mainList, n.Word, _startWord, n);
-              
-               // return false;// NodeProcessor(n.ChildNodes);
-            }
+        //        var regex = _wordUtility.GetWordSearchRegex(n.Word, _endWord);
+        //        n.ChildNodes = _wordFilter.GetWordsForRegex(regex, _mainList, _startWord, n);              
+               
+        //    }
 
-            return false;
-        }
+        //    return false;
+        //}
     }
 }

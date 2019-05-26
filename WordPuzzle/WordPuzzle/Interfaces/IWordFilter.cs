@@ -7,7 +7,7 @@ namespace WordPuzzle.Interfaces
 {
     public interface IWordFilter
     {
-        List<string> CharacterAtPosition(char item, int index, List<string> list);
-        List<Node> GetWordsForRegex(string regex, List<string> list, string thisWord, string originalWord, Node parentNode);
+        //List<string> CharacterAtPosition(char item, int index, List<string> list);
+        List<Node> GetWordsForRegex(string regex, List<string> list, string originalWord, Node parentNode);
     }
 }
