@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.28917.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordPuzzle", "WordPuzzle\WordPuzzle.csproj", "{36FE9134-9501-4A75-BDB9-9DBF0814E8AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordPuzzle.Tests", "WordPuzzle.Tests\WordPuzzle.Tests.csproj", "{8F3183AA-3D75-43AE-A20C-89349917B343}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordPuzzle.Tests", "WordPuzzle.Tests\WordPuzzle.Tests.csproj", "{8F3183AA-3D75-43AE-A20C-89349917B343}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordPuzzle.UnitTests", "WordPuzzle.UnitTests\WordPuzzle.UnitTests.csproj", "{EFD11C8F-A174-443F-86EC-DCA3EF5990A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordPuzzle.UnitTests", "WordPuzzle.UnitTests\WordPuzzle.UnitTests.csproj", "{EFD11C8F-A174-443F-86EC-DCA3EF5990A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformanceTestRunner", "PerformanceTestRunner\PerformanceTestRunner.csproj", "{D61C13B0-6EFA-43C8-A456-8F7E558F21D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{EFD11C8F-A174-443F-86EC-DCA3EF5990A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFD11C8F-A174-443F-86EC-DCA3EF5990A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFD11C8F-A174-443F-86EC-DCA3EF5990A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D61C13B0-6EFA-43C8-A456-8F7E558F21D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D61C13B0-6EFA-43C8-A456-8F7E558F21D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D61C13B0-6EFA-43C8-A456-8F7E558F21D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D61C13B0-6EFA-43C8-A456-8F7E558F21D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

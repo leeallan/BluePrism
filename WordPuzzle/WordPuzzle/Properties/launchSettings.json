@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WordPuzzle": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\Users\\lsall\\Downloads\\Blue Prism\\words-english.txt\" spin rent \"\""
+    }
+  }
+}

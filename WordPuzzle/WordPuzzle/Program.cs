@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using WordPuzzle.Interfaces;
+using WordPuzzle.Models;
 using WordPuzzle.Tests;
 
 namespace WordPuzzle
@@ -16,13 +17,28 @@ namespace WordPuzzle
         IFileUtility _fileUtility;
         static void Main(string[] args)
         {
+            if (args.Length < 4)
+                throw new ArgumentException("not enough arguments");
+
+            if (args.Length > 4)
+                throw new ArgumentException("not enough arguments");
+
+            AppProperties props = new AppProperties()
+            {
+                FilePath = args[0],
+                StartWord = args[1],
+                EndWord = args[2],
+                ResultPath = args[3]
+            };
+            
             //TODO: error handling, words must be in dictionary
             //Unit tests etc
             //log to screen
             //File Log?
             //Max iteration should be noe more than letters differetn? x2?
             //If no children can be found?
-            
+            //Performasmnce test: regex, vs compare
+
 
             //setup our DI
             var serviceProvider = new ServiceCollection()

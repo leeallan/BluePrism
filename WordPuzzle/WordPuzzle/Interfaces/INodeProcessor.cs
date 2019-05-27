@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using WordPuzzle.Events;
 using WordPuzzle.Models;
 
 namespace WordPuzzle.Interfaces
@@ -9,6 +10,10 @@ namespace WordPuzzle.Interfaces
     {
         bool ProcessNodes(List<Node> currentNodes, AppProperties props);
         void AdvanceCurrentNodes(List<Node> currentNodes);
-                
+
+        event EventHandler<PuzzleEventArgs> OnComplete;
+        void FireCompleteEvent(PuzzleEventArgs e);
+               
+        
     }
 }

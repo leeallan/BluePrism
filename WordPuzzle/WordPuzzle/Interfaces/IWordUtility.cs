@@ -6,8 +6,7 @@ using WordPuzzle.Models;
 namespace WordPuzzle.Interfaces
 {
     public interface IWordUtility
-    {
-        CharIndex[] CharIndices(string startWord, string endWord);
+    {      
         string GetWordSearchRegex(string startWord, string endWord);
 
     }

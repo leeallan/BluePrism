@@ -1,40 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using WordPuzzle.Events;
 using WordPuzzle.Interfaces;
 using WordPuzzle.Models;
 
 namespace WordPuzzle
-{
-    public interface IPuzzleProcessor
-    {
-        void Process(string startWord, string endWord);
-    }
-
+{  
+   
     public class PuzzleProcessor : IPuzzleProcessor
     {
         private readonly IFileUtility _fileUtility;
-        private readonly IWordUtility _wordUtility;
-        private readonly IWordFilter _wordFilter;
         private readonly INodeProcessor _nodeProcessor;
         public PuzzleProcessor(
-            IFileUtility fileUtility,
-            IWordUtility wordUtility,
-            IWordFilter wordFilter,
+            IFileUtility fileUtility,            
             INodeProcessor nodeProcessor)
         {
-            _fileUtility = fileUtility;
-            _wordUtility = wordUtility;
-            _wordFilter = wordFilter;
+            _fileUtility = fileUtility;            
             _nodeProcessor = nodeProcessor;
         }
 
         List<Node> _currentNodes;
         bool _goalReached = false;
-        string _endWord = "";
-        string _startWord = "";
         List<string> _mainList;
+        TimeSpan _timeTaken;
 
         public void Process(string startWord, string endWord)
         {
@@ -45,15 +36,18 @@ namespace WordPuzzle
             _mainList.Remove(startWord);
             
             AppProperties props = new AppProperties();
-            props.EndWord = _endWord = endWord;
-            props.StartWord = _startWord = startWord;           
+            props.EndWord =  endWord;
+            props.StartWord = startWord;           
             props.WordList = _mainList;
 
             _currentNodes = new List<Node>();
             _currentNodes.Add(new Node() { IsStartNode = true, Word = startWord });
+                        
+            _nodeProcessor.OnComplete += OnPuzzleCompleted;
+            string msg = "";
 
-            string msg = "";           
-
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
             while(!_goalReached)
             {
                 if (_currentNodes.Count == 0)
@@ -76,7 +70,44 @@ namespace WordPuzzle
                     break;
                     //TODO success
                 }              
-            }          
+            }
+
+            sw.Stop();
+            _timeTaken = sw.Elapsed;
+            Console.WriteLine($"Puzzle complete in {_timeTaken.ToString(@"mm\:ss\:fff")}");
+        }
+
+
+        //TODO WHER TO PUT???
+        //void OnPuzzleComplete(object sender, PuzzleEventArgs e)
+        //{
+                        
+        //}
+
+        public void OnPuzzleCompleted(object sender, PuzzleEventArgs e)
+        {
+            List<string> wordList = new List<string>();
+            Node currentNode = e.Node;
+           
+            while (!currentNode.IsStartNode)
+            {
+                wordList.Add(currentNode.Word);
+                currentNode = currentNode.ParentNode;
+            }
+
+            wordList.Add(currentNode.Word);
+
+            wordList.Reverse();
+           
+            int wordNo = 1;
+            foreach(var w in wordList)
+            {
+                Console.WriteLine($"{wordNo++}: {w}");
+
+            }
+
+
+            
         }
     }
 }

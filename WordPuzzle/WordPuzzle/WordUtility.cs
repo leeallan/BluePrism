@@ -10,23 +10,15 @@ namespace WordPuzzle
 {
     public class WordUtility : IWordUtility
     {
-        List<CharIndex> _charIndices;
-       
-        public CharIndex[] CharIndices(string startWord, string endWord)
-        {
-            _charIndices = new List<CharIndex>();
-            for (byte i = 0; i < Constants.WordLength; i++)
-            {
-                AddToList(startWord[i], i);
-                if (startWord[i] != endWord[i])
-                {
-                    AddToList(endWord[i], i);
-                }
-            }
+        List<CharIndex> _charIndices;       
+      
 
-            return _charIndices.ToArray();
-        }
-
+        /// <summary>
+        /// Get Regex to find words with 1 differnet character anywhere along the length of the start and end words, where the characters are different. eg spin spot, only last 2 characters differ
+        /// </summary>
+        /// <param name="startWord"></param>
+        /// <param name="endWord"></param>
+        /// <returns></returns>
         public string GetWordSearchRegex(string startWord, string endWord)
         {            
             _charIndices = new List<CharIndex>();

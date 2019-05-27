@@ -31,7 +31,7 @@ namespace WordPuzzle
                         })
                         .ToList();
 
-            SanitiseMatchedList(matchedList, originalWord);
+            SanitiseMatchedList(matchedList, originalWord, Constants.MismatchThreshold);
 
             return matchedList;
 
@@ -39,11 +39,11 @@ namespace WordPuzzle
 
 
         /// <summary>
-        /// Remove words that have n nuber of letters different to the startword, (Controlled by a threshold setting)
+        /// Remove words that have > n number of letters different to the startword, (Controlled by a threshold setting)
         /// </summary>
         /// <param name="list"></param>
         /// <param name="originalWord"></param>
-        private void SanitiseMatchedList(List<Node> nodeList, string originalWord)
+        private void SanitiseMatchedList(List<Node> nodeList, string originalWord, byte mismatchThreshold)
         {
             List<int> indices = new List<int>();
 
@@ -57,7 +57,7 @@ namespace WordPuzzle
                         mismatchCount++;
                     }
                 }
-                if (mismatchCount > Constants.MismatchThreshold)
+                if (mismatchCount > mismatchThreshold)
                 {
                     indices.Add(i);
                 }
@@ -67,10 +67,12 @@ namespace WordPuzzle
             foreach (var index in orderedist)
             {
                 nodeList.Remove(nodeList[index]);
-            }
+            }                        
+        }
 
-
-                        
+        public void SanitiseMatchedListTestAccessor(List<Node> nodeList, string originalWord, byte mismatchThreshold)
+        {
+            SanitiseMatchedList(nodeList, originalWord, mismatchThreshold);
         }
     }
 }

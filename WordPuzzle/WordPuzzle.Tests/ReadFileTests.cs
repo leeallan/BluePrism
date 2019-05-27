@@ -17,14 +17,14 @@ namespace WordPuzzle.Tests
             Console.WriteLine("Hello World!");
             List<string> str = new List<string>();
             List<string> all4LetterWords = new List<string>();
-            using (StreamReader file = new StreamReader(@"C:\Users\lsall\Downloads\Blue Prism\words-english.txt")) //TODO put in config
+            using (StreamReader file = new StreamReader(@"C:\Users\lsall\Downloads\Blue Prism\words-english.txt")) 
             {
                 Stopwatch sw = new Stopwatch();
                 sw.Start();
 
-                while (file.Read() >= 0)
+                while (file.Peek() >= 0)
                 {
-                    str.Add(file.ReadLine());
+                    str.Add(file.ReadLine().ToLower());
                 }
 
                 all4LetterWords = str.Where(x => x.Length == 4).ToList();
@@ -33,12 +33,12 @@ namespace WordPuzzle.Tests
                 timeToReadAll = sw.ElapsedMilliseconds;
             }
 
-            using (StreamReader file = new StreamReader(@"C:\Users\lsall\Downloads\Blue Prism\words-english.txt")) //TODO put in config
+            using (StreamReader file = new StreamReader(@"C:\Users\lsall\Downloads\Blue Prism\words-english.txt")) 
             {
                 Stopwatch sw = new Stopwatch();
                 sw.Start();
 
-                while (file.Read() >= 0)
+                while (file.Peek() >= 0)
                 {
                     str.Add(file.ReadLine());
                 }
@@ -46,23 +46,23 @@ namespace WordPuzzle.Tests
                 foreach (var s in str)
                 {
                     if (s.Length == 4)
-                        all4LetterWords.Add(s);
+                        all4LetterWords.Add(s.ToLower());
                 }
 
                 sw.Stop();
                 timeToReadAllNoLinq = sw.ElapsedMilliseconds;
             }
 
-            using (StreamReader file = new StreamReader(@"C:\Users\lsall\Downloads\Blue Prism\words-english.txt")) //TODO put in config
+            using (StreamReader file = new StreamReader(@"C:\Users\lsall\Downloads\Blue Prism\words-english.txt")) 
             {
                 Stopwatch sw = new Stopwatch();
                 sw.Start();
 
-                while (file.Read() >= 0)
+                while (file.Peek() >= 0)
                 {
                     string word = file.ReadLine();
                     if (word.Length == 4)
-                        all4LetterWords.Add(word);
+                        all4LetterWords.Add(word.ToLower());
                 }
 
                 //all4LetterWords = str.Where(x => x.Length == 4).ToList();
