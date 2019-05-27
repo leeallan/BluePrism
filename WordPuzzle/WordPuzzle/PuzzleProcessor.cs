@@ -41,9 +41,10 @@ namespace WordPuzzle
 
             Stopwatch sw = new Stopwatch();
             sw.Start();
-
+            int iterations = 0;
             while(!_goalReached)
             {
+                iterations++;
                 if (_currentNodes.Count == 0)
                 {                    
                     Console.WriteLine("No route was found :(");

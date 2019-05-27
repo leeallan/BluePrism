@@ -38,7 +38,7 @@ namespace WordPuzzle
                 }
 
                 var regex = _wordUtility.GetWordSearchRegex(n.Word, props.EndWord);
-                n.ChildNodes = _wordFilter.GetWordsForRegex(regex, props.WordList, props.StartWord, n);
+                n.ChildNodes = _wordFilter.GetWordsForRegex(regex, props, n);
             }
 
             return false;

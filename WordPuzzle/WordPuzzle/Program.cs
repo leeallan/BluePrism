@@ -17,6 +17,8 @@ namespace WordPuzzle
         IFileUtility _fileUtility;
         static void Main(string[] args)
         {
+            var a = ConfigurationManager.AppSettings[0];
+
             if (args.Length < 4)
                 throw new ArgumentException("not enough arguments");
 

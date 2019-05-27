@@ -19,13 +19,13 @@ namespace WordPuzzle
         /// <param name="originalWord"></param>
         /// <param name="parentNode"></param>
         /// <returns></returns>
-        public List<Node> GetWordsForRegex(string regex, List<string> list, string originalWord, Node parentNode)
+        public List<Node> GetWordsForRegex(string regex, AppProperties props, Node parentNode)
         {
             Regex r = new Regex(regex, RegexOptions.IgnoreCase);
 
-            list.Remove(parentNode.Word);
+            props.WordList.Remove(parentNode.Word);
 
-            var matchedList = list
+            var matchedList = props.WordList
                     .Where(x => r.IsMatch(x))
                         .Select(x => new Node()
                         {
@@ -34,7 +34,7 @@ namespace WordPuzzle
                         })
                         .ToList();
 
-            SanitiseMatchedList(matchedList, originalWord, Constants.MismatchThreshold);
+            SanitiseMatchedList(matchedList, props.StartWord, props.EndWord, Constants.MismatchThreshold);
 
             return matchedList;
 
@@ -46,7 +46,7 @@ namespace WordPuzzle
         /// </summary>
         /// <param name="list"></param>
         /// <param name="originalWord"></param>
-        private void SanitiseMatchedList(List<Node> nodeList, string originalWord, byte mismatchThreshold)
+        private void SanitiseMatchedList(List<Node> nodeList, string startWord, string  endWord, byte mismatchThreshold)
         {
             List<int> indices = new List<int>();
 
@@ -55,7 +55,7 @@ namespace WordPuzzle
                 byte mismatchCount = 0;
                 for (int j = 0; j < nodeList[i].Word.Length; j++)
                 {
-                    if (nodeList[i].Word[j] != originalWord[j])
+                    if (nodeList[i].Word[j] != startWord[j] && nodeList[i].Word[j] != endWord[j])
                     {
                         mismatchCount++;
                     }
@@ -73,9 +73,9 @@ namespace WordPuzzle
             }                        
         }
 
-        public void SanitiseMatchedListTestAccessor(List<Node> nodeList, string originalWord, byte mismatchThreshold)
+        public void SanitiseMatchedListTestAccessor(List<Node> nodeList, string startWord, string endWord, byte mismatchThreshold)
         {
-            SanitiseMatchedList(nodeList, originalWord, mismatchThreshold);
+            SanitiseMatchedList(nodeList, startWord, endWord, mismatchThreshold);
         }
     }
 }

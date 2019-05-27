@@ -19,9 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ApplicationDefinition Include="App1.config">
+    <Content Include="App1.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </ApplicationDefinition>
+    </Content>
   </ItemGroup>
 
 </Project>
