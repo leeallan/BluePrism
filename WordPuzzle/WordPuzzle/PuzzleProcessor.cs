@@ -33,6 +33,7 @@ namespace WordPuzzle
             props.WordList.Remove(props.StartWord);
 
             _outputPath = props.ResultPath;
+
             _currentNodes = new List<Node>();
             _currentNodes.Add(new Node() { IsStartNode = true, Word = props.StartWord });
                         
@@ -90,9 +91,6 @@ namespace WordPuzzle
 
             }
             _fileUtility.ResultsToFile(_outputPath, wordList);
-
-
-
 
         }
     }

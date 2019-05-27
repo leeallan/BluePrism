@@ -29,12 +29,7 @@ namespace WordPuzzle
                 StartWord = args[1],
                 EndWord = args[2],
                 ResultPath = args[3]
-            };
-            
-            //TODO: error handling, words must be in dictionary
-            //Performance of objects? Newing up? dynamic array, vs arra for entire dic of 4 letter words                              
-            
-
+            };                    
 
             //setup our DI
             var serviceProvider = new ServiceCollection()
