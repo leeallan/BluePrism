@@ -11,7 +11,11 @@ namespace PerformanceTestRunner
             regexTests.LoadFile();
             regexTests.FindSpinChildrenRegex();
             regexTests.FindSpinChildrenNoRegex();
-            
+
+
+            ReadFileTests r = new ReadFileTests();
+            r.QuickestFileReadTests();
+
         }
     }
 }

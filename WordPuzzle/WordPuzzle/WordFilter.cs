@@ -10,12 +10,15 @@ namespace WordPuzzle
 {
     public class WordFilter : IWordFilter
     {
-
-        //public List<string> CharacterAtPosition(char item, int index, List<string> list)
-        //{
-        //    return list.Where(x => x.ElementAt(index) == item).ToList();
-        //}
-
+ 
+        /// <summary>
+        /// Generate Nodes for words retrieved by the regex
+        /// </summary>
+        /// <param name="regex"></param>
+        /// <param name="list"></param>
+        /// <param name="originalWord"></param>
+        /// <param name="parentNode"></param>
+        /// <returns></returns>
         public List<Node> GetWordsForRegex(string regex, List<string> list, string originalWord, Node parentNode)
         {
             Regex r = new Regex(regex, RegexOptions.IgnoreCase);

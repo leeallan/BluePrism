@@ -24,36 +24,28 @@ namespace WordPuzzle
 
         List<Node> _currentNodes;
         bool _goalReached = false;
-        List<string> _mainList;
+        string _outputPath;
         TimeSpan _timeTaken;
 
-        public void Process(string startWord, string endWord)
+        public void Process(AppProperties props)
         {
+            props.WordList = _fileUtility.FileToList(props.FilePath);
+            props.WordList.Remove(props.StartWord);
 
-            //TODO Pass event into processor, to retracenodes, and output result
-            //unit testing
-            _mainList = _fileUtility.FileToList(@"C:\Users\lsall\Downloads\Blue Prism\words-english.txt");
-            _mainList.Remove(startWord);
-            
-            AppProperties props = new AppProperties();
-            props.EndWord =  endWord;
-            props.StartWord = startWord;           
-            props.WordList = _mainList;
-
+            _outputPath = props.ResultPath;
             _currentNodes = new List<Node>();
-            _currentNodes.Add(new Node() { IsStartNode = true, Word = startWord });
+            _currentNodes.Add(new Node() { IsStartNode = true, Word = props.StartWord });
                         
-            _nodeProcessor.OnComplete += OnPuzzleCompleted;
-            string msg = "";
+            _nodeProcessor.OnComplete += OnPuzzleCompleted;         
 
             Stopwatch sw = new Stopwatch();
             sw.Start();
+
             while(!_goalReached)
             {
                 if (_currentNodes.Count == 0)
-                {
-                    msg = "No route was found :(";
-                    Console.WriteLine(msg);
+                {                    
+                    Console.WriteLine("No route was found :(");
                     break;
                 }
 
@@ -64,25 +56,16 @@ namespace WordPuzzle
                     _nodeProcessor.AdvanceCurrentNodes(_currentNodes);                    
                 }
                 else
-                {
-                    //TODO: anything here?
-                    var a = _currentNodes;
-                    break;
-                    //TODO success
+                {                                 
+                    break;                  
                 }              
             }
 
             sw.Stop();
             _timeTaken = sw.Elapsed;
             Console.WriteLine($"Puzzle complete in {_timeTaken.ToString(@"mm\:ss\:fff")}");
+            Console.WriteLine("File out put to : " + props.ResultPath);
         }
-
-
-        //TODO WHER TO PUT???
-        //void OnPuzzleComplete(object sender, PuzzleEventArgs e)
-        //{
-                        
-        //}
 
         public void OnPuzzleCompleted(object sender, PuzzleEventArgs e)
         {
@@ -103,11 +86,14 @@ namespace WordPuzzle
             foreach(var w in wordList)
             {
                 Console.WriteLine($"{wordNo++}: {w}");
+                
 
             }
+            _fileUtility.ResultsToFile(_outputPath, wordList);
 
 
-            
+
+
         }
     }
 }
