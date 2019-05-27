@@ -12,3 +12,5 @@
 /WordPuzzle/PerformanceTestRunner/obj
 /WordPuzzle/WordPuzzle/bin/Release/netcoreapp2.2
 /WordPuzzle/WordPuzzle.UnitTests/bin
+/WordPuzzle/packages
+/WordPuzzle/WordPuzzle.App

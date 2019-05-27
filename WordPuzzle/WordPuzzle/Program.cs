@@ -1,13 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using WordPuzzle.Interfaces;
 using WordPuzzle.Models;
-using WordPuzzle.Tests;
 
 namespace WordPuzzle
 {
@@ -17,13 +11,12 @@ namespace WordPuzzle
         IFileUtility _fileUtility;
         static void Main(string[] args)
         {
-            var a = ConfigurationManager.AppSettings[0];
-
+          
             if (args.Length < 4)
                 throw new ArgumentException("not enough arguments");
 
             if (args.Length > 4)
-                throw new ArgumentException("not enough arguments");
+                throw new ArgumentException("too many arguments");
 
             AppProperties props = new AppProperties()
             {
