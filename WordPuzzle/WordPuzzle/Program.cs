@@ -11,20 +11,35 @@ namespace WordPuzzle
         IFileUtility _fileUtility;
         static void Main(string[] args)
         {
-          
+            AppProperties props = new AppProperties();
+            props.MismatchThreshold = Constants.MismatchThresholdDefault;
+
             if (args.Length < 4)
                 throw new ArgumentException("not enough arguments");
 
-            if (args.Length > 4)
+            if (args.Length > 5)
                 throw new ArgumentException("too many arguments");
 
-            AppProperties props = new AppProperties()
+            if (args.Length == 5)
             {
-                FilePath = args[0],
-                StartWord = args[1],
-                EndWord = args[2],
-                ResultPath = args[3]
-            };                    
+                if (byte.TryParse(args[4], out byte threshold))
+                {
+                    if (threshold < 2)
+                        throw new ArgumentException("threshold must be 2 or greater, or all words will be removed, and no route found");
+
+                    props.MismatchThreshold = threshold;
+                }
+                else
+                {
+                    throw new ArgumentException("Mismatch Threshold paramert must be numeric byte");
+                }
+            }
+
+            props.FilePath = args[0];
+            props.StartWord = args[1];
+            props.EndWord = args[2];
+            props.ResultPath = args[3];
+                             
 
             //setup our DI
             var serviceProvider = new ServiceCollection()

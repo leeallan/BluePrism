@@ -2,7 +2,7 @@
   "profiles": {
     "WordPuzzle": {
       "commandName": "Project",
-      "commandLineArgs": "\"C:\\Users\\lsall\\Downloads\\Blue Prism\\words-english.txt\" spin rent \"C:\\Users\\lsall\\Downloads\\Blue Prism\\result.txt\""
+      "commandLineArgs": "\"C:\\Users\\lsall\\Downloads\\Blue Prism\\words-english.txt\" spin rent \"C:\\Users\\lsall\\Downloads\\Blue Prism\\result.txt\" 4"
     }
   }
 }

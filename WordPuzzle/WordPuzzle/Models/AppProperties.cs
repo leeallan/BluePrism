@@ -12,5 +12,7 @@ namespace WordPuzzle.Models
         public string FilePath { get; set; }
         public string ResultPath { get; set; }
 
+        public byte MismatchThreshold { get; set; }
+
     }
 }

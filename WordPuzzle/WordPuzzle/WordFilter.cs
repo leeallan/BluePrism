@@ -34,7 +34,7 @@ namespace WordPuzzle
                         })
                         .ToList();
 
-            SanitiseMatchedList(matchedList, props.StartWord, props.EndWord, Constants.MismatchThreshold);
+            SanitiseMatchedList(matchedList, props.StartWord, props.EndWord, props.MismatchThreshold);
 
             return matchedList;
 
@@ -60,7 +60,7 @@ namespace WordPuzzle
                         mismatchCount++;
                     }
                 }
-                if (mismatchCount > mismatchThreshold)
+                if (mismatchCount >= mismatchThreshold)
                 {
                     indices.Add(i);
                 }
